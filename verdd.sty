@@ -1,0 +1,121 @@
+% Written by Khalid Alnajjar (mokha)
+
+\usepackage{fancyhdr}
+\usepackage{multicol}
+%multicol setting
+\setlength\columnsep{0.5cm}
+% \setlength{\columnseprule}{1pt}
+\usepackage{amsthm}
+\usepackage{microtype}
+\usepackage{xifthen}
+\usepackage[bf,sf,center]{titlesec}
+\usepackage{xspace}
+\usepackage[inline]{enumitem}
+
+%fancyheader settings
+\fancyhead[LO]{\textsf{\rightmark}}
+\fancyhead[RE]{\textsf{\leftmark}}
+\fancyhead[LE,RO]{}
+\renewcommand{\headrulewidth}{0.5pt}
+
+
+\newcommand{\spec}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {(#1)\xspace}% if #1 is not empty
+}
+
+\newcommand{\ispec}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {(\textit{#1})\xspace}% if #1 is not empty
+}
+
+\newcommand{\pos}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {\textit{\MakeLowercase{#1}}\xspace}% if #1 is not empty
+}
+
+\newcommand{\posd}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {\textit{\MakeLowercase{#1}}.\xspace}% if #1 is not empty
+}
+
+\newcommand{\inflectform}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {(#1)\xspace}% if #1 is not empty
+}
+
+\newcommand{\examplesentence}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {#1\xspace}% if #1 is not empty
+}
+
+\newcommand{\lexemetext}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {\textbf{\textfinnish{#1}}\xspace}% if #1 is not empty
+}
+
+\newcommand{\translationtext}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {#1\xspace}% if #1 is not empty
+}
+
+\newcommand{\regtext}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {}% if #1 is empty
+    {#1\xspace}% if #1 is not empty
+}
+
+%dictionary commands and styling
+\newcommand{\entry}[3]{\item\markboth{#1}{#1}\lexemetext{#1}\spec{#3}\posd{#2}}
+
+\newcommand{\translation}[9]{\item\pos{#3}\ispec{#5}\spec{#6}\translationtext{#1}\spec{#2}\inflectform{#4}\examplesentence{#7}\examplesentence{#8}\regtext{#9}\unskip}
+
+\newcommand{\dictionarystyle}{\clearpage\pagestyle{fancy}}
+\newcommand{\defaultstyle}{\clearpage\pagestyle{plain}\onecolumn}
+
+\titleclass{\dicsec}{straight}[\section]
+\titleformat{\dicsec}[display]
+  {%\vspace{\dimexpr -12pt+10pt}\vspace*{\dimexpr 12pt-10pt}%
+  \normalfont\normalsize\selectfont\bf\centering\Large} % format
+  {} % label
+  {0pt} %sep
+  {} %after
+  
+% \titlespacing*{\dicsec}{0pt}{0cm}{0cm}
+\titlespacing*{\dicsec}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\newcommand{\dictionarysection}[1]{\thispagestyle{plain} \dicsec*{#1}}
+
+
+\newenvironment{dictionarychapter}[1]
+ {%\let\@afterindentfalse\@afterindenttrue
+%   \begin{multicols*}{2}[\dictionarysection{#1}]
+%   \setlength{\leftskip}{\parindent}%
+%   \setlength{\parindent}{-\leftskip}%
+%   \setlength{\parskip}{\medskipamount}
+% \twocolumn[\dictionarysection{#1}]
+\newpage \dictionarysection{#1}
+ \begin{itemize}[label=,
+ labelindent=0pt,
+ labelwidth=0pt,
+ labelsep=0pt,
+ leftmargin=\parindent,itemindent=-\parindent,
+ itemsep=5pt,parsep=2.5pt]}
+ {\end{itemize}
+%  \end{multicols*}
+ }
+
+\newenvironment{dictionaryentry}
+{\item \begin{itemize*}[label=,nosep,noitemsep,itemjoin={\@addpunct{,}},after*=.]}
+{\end{itemize*}}
+
+\newcommand{\includedictionary}[2]{\begin{dictionarychapter}{#1}\input{#2}\end{dictionarychapter}}
+

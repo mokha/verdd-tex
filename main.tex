@@ -1,0 +1,49 @@
+\documentclass[10pt,a5paper]{verdd}
+\usepackage{verdd}
+
+\usepackage{lipsum}
+\usepackage{import}
+
+% for hyphenation
+% \usepackage[finnish]{babel} % for Finnish hyphenation
+
+\usepackage{url}
+\usepackage{fontspec}
+
+\usepackage{polyglossia}
+% \setdefaultlanguage{sami} % hyphenation rules seem to not exist on Overleaf
+% \setotherlanguages{finnish,english}
+\setdefaultlanguage{finnish}
+
+
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{expex}
+
+\setmainfont{FreeSerif}
+
+\title{verdd - dictionary}
+\author{Khalid Alnajjar}
+\date{January 2020}
+
+\begin{document}
+
+% in case we have to design the title and cover as well, uncomment below and code
+% \maketitle
+% \newpage
+
+
+\defaultstyle
+\section*{Acknowledgements}
+\lipsum[1-8]
+
+\newpage
+
+\dictionarystyle
+\subimport*{20200812-223308-7f6d8-export/}{dictionary.tex}
+
+\newpage
+\defaultstyle
+\section*{Notes}
+\lipsum[1-5]
+\end{document}

@@ -73,6 +73,8 @@
     {#1\xspace}% if #1 is not empty
 }
 
+\newcommand{\rawtext}[1]{\ifthenelse{\isempty{#1}}{}{\item #1\unskip}} 
+
 %dictionary commands and styling
 \newcommand{\entry}[3]{\item\markboth{#1}{#1}\lexemetext{#1}\spec{#3}\posd{#2}}
 
